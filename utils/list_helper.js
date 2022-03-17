@@ -1,4 +1,5 @@
 const _ = require('lodash/collection');
+const Blog = require('../models/blog');
 
 const dummy = (blogs) => 1;
 
