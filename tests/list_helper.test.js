@@ -1,67 +1,7 @@
 const {
   dummy, totalLikes, favoriteBlog, mostBlogs, mostLikes,
 } = require('../utils/list_helper');
-
-const listWithOneBlog = [
-  {
-    _id: '5a422aa71b54a676234d17f8',
-    title: 'Go To Statement Considered Harmful',
-    author: 'Edsger W. Dijkstra',
-    url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
-    likes: 5,
-    __v: 0,
-  },
-];
-const listWithManyBlogs = [
-  {
-    _id: '5a422a851b54a676234d17f7',
-    title: 'React patterns',
-    author: 'Michael Chan',
-    url: 'https://reactpatterns.com/',
-    likes: 7,
-    __v: 0,
-  },
-  {
-    _id: '5a422aa71b54a676234d17f8',
-    title: 'Go To Statement Considered Harmful',
-    author: 'Edsger W. Dijkstra',
-    url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
-    likes: 5,
-    __v: 0,
-  },
-  {
-    _id: '5a422b3a1b54a676234d17f9',
-    title: 'Canonical string reduction',
-    author: 'Edsger W. Dijkstra',
-    url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
-    likes: 12,
-    __v: 0,
-  },
-  {
-    _id: '5a422b891b54a676234d17fa',
-    title: 'First class tests',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
-    likes: 10,
-    __v: 0,
-  },
-  {
-    _id: '5a422ba71b54a676234d17fb',
-    title: 'TDD harms architecture',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
-    likes: 0,
-    __v: 0,
-  },
-  {
-    _id: '5a422bc61b54a676234d17fc',
-    title: 'Type wars',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html',
-    likes: 2,
-    __v: 0,
-  },
-];
+const helper = require('./test_helper');
 
 test('dummy returns one', () => {
   const blogs = [];
@@ -77,12 +17,12 @@ describe('total likes', () => {
   });
 
   test('when list has only one blog, equals the likes of that', () => {
-    const result = totalLikes(listWithOneBlog);
+    const result = totalLikes(helper.listWithOneBlog);
     expect(result).toBe(5);
   });
 
   test('of a bigger list is calculated right', () => {
-    const result = totalLikes(listWithManyBlogs);
+    const result = totalLikes(helper.listWithManyBlogs);
     expect(result).toBe(36);
   });
 });
@@ -94,13 +34,13 @@ describe('favorite blog', () => {
   });
 
   test('of a list with a single blog to be that blog, without unneeded information', () => {
-    let oneBlog = { ...listWithOneBlog[0] };
+    let oneBlog = { ...helper.listWithOneBlog[0] };
     oneBlog = {
       title: oneBlog.title,
       author: oneBlog.author,
       likes: oneBlog.likes,
     };
-    const result = favoriteBlog(listWithOneBlog);
+    const result = favoriteBlog(helper.listWithOneBlog);
     expect(result).toEqual(oneBlog);
   });
 
@@ -110,7 +50,7 @@ describe('favorite blog', () => {
       author: 'Edsger W. Dijkstra',
       likes: 12,
     };
-    const result = favoriteBlog(listWithManyBlogs);
+    const result = favoriteBlog(helper.listWithManyBlogs);
     expect(result).toEqual(mostLikesBlog);
   });
 });
@@ -126,7 +66,7 @@ describe('most blogs', () => {
       author: 'Edsger W. Dijkstra',
       blogs: 1,
     };
-    const result = mostBlogs(listWithOneBlog);
+    const result = mostBlogs(helper.listWithOneBlog);
     expect(result).toEqual(singleAuthor);
   });
 
@@ -135,7 +75,7 @@ describe('most blogs', () => {
       author: 'Robert C. Martin',
       blogs: 3,
     };
-    const result = mostBlogs(listWithManyBlogs);
+    const result = mostBlogs(helper.listWithManyBlogs);
     expect(result).toEqual(mostBlogsAuthor);
   });
 });
@@ -151,7 +91,7 @@ describe('most likes', () => {
       author: 'Edsger W. Dijkstra',
       likes: 5,
     };
-    const result = mostLikes(listWithOneBlog);
+    const result = mostLikes(helper.listWithOneBlog);
     expect(result).toEqual(singleAuthor);
   });
 
@@ -160,7 +100,7 @@ describe('most likes', () => {
       author: 'Edsger W. Dijkstra',
       likes: 17,
     };
-    const result = mostLikes(listWithManyBlogs);
+    const result = mostLikes(helper.listWithManyBlogs);
     expect(result).toEqual(mostLikesAuthor);
   });
 });

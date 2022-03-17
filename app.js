@@ -1,5 +1,6 @@
 const cors = require('cors');
 const express = require('express');
+require('express-async-errors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const blogsRouter = require('./controller/blogs');
